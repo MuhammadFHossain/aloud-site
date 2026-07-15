@@ -1,0 +1,363 @@
+/* aloud — website styles
+   Palette + type pulled straight from the app (DESIGN.md / Theme.swift).
+   Every color is a light/dark pair so dark mode just works. No hard-coded colors in markup. */
+
+/* ---- fonts (bundled, open-source OFL) ---- */
+@font-face {
+  font-family: "Fraunces";
+  src: url("fonts/Fraunces-VF.ttf") format("truetype-variations");
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Fraunces";
+  src: url("fonts/Fraunces-Italic-VF.ttf") format("truetype-variations");
+  font-weight: 100 900; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("fonts/Newsreader-VF.ttf") format("truetype-variations");
+  font-weight: 200 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("fonts/Newsreader-Italic-VF.ttf") format("truetype-variations");
+  font-weight: 200 700; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Kalam";
+  src: url("fonts/Kalam-Regular.ttf") format("truetype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Kalam";
+  src: url("fonts/Kalam-Light.ttf") format("truetype");
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+
+/* ---- the color vocabulary (from Palette) ---- */
+:root {
+  --paper:     #FCFBF8;
+  --paperDeep: #F5F3EE;
+  --card:      #FFFFFF;
+  --ink:       #1B1A17;
+  --ink2:      #6B675D;
+  --muted:     #A7A294;
+  --line:      #EAE7DF;
+  --line2:     #DED9CD;
+  --rule:      #E3DED1;
+  --pen:       #243652;
+  --onPen:     #F4F6FA;
+  --selection: #E6ECF7;
+  --shadow:    rgba(0,0,0,0.06);
+  --shadow2:   rgba(0,0,0,0.10);
+
+  --serif: "Fraunces", "Georgia", serif;
+  --read:  "Newsreader", "Georgia", serif;
+  --pen-font: "Kalam", "Bradley Hand", cursive;
+  --ui:    -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+
+  --wrap: 1040px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper:     #171A22;
+    --paperDeep: #1E222B;
+    --card:      #20242E;
+    --ink:       #E9E6DD;
+    --ink2:      #A9A597;
+    --muted:     #8A8578;
+    --line:      #2A2E38;
+    --line2:     #343A44;
+    --rule:      #232733;
+    --pen:       #9DB8E0;
+    --onPen:     #172033;
+    --selection: #2C3B57;
+    --shadow:    rgba(0,0,0,0.44);
+    --shadow2:   rgba(0,0,0,0.55);
+  }
+}
+
+/* ---- base ---- */
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--read);
+  font-size: 18px;
+  line-height: 1.65;
+  font-weight: 380;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+::selection { background: var(--selection); }
+
+a { color: var(--pen); text-decoration-color: var(--line2); text-underline-offset: 3px; }
+a:hover { text-decoration-color: var(--pen); }
+
+img { max-width: 100%; display: block; }
+
+.wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+
+h1, h2, h3 { font-family: var(--serif); font-weight: 560; line-height: 1.12; letter-spacing: -0.01em; margin: 0; }
+h1 { font-size: clamp(38px, 7vw, 66px); }
+h2 { font-size: clamp(28px, 4.5vw, 40px); }
+h3 { font-size: 21px; }
+
+p { margin: 0 0 1em; }
+.lead { font-size: clamp(19px, 2.4vw, 23px); color: var(--ink2); }
+.small { font-size: 15px; }
+.muted { color: var(--muted); }
+
+/* ---- wordmark ---- */
+.wordmark {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 540;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.wordmark .dot { color: var(--pen); }
+
+/* ---- header ---- */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--paper) 86%, transparent);
+  backdrop-filter: saturate(1.4) blur(12px);
+  -webkit-backdrop-filter: saturate(1.4) blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.site-header .bar {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.nav { display: flex; gap: 22px; align-items: center; }
+.nav a {
+  font-family: var(--ui); font-size: 15px; color: var(--ink2);
+  text-decoration: none; letter-spacing: 0.01em;
+}
+.nav a:hover { color: var(--pen); }
+
+/* ---- pen handwriting ---- */
+.pen {
+  font-family: var(--pen-font);
+  color: var(--pen);
+  font-weight: 400;
+}
+
+/* ---- buttons / app badge ---- */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--ui); font-size: 16px; font-weight: 560;
+  padding: 14px 22px; border-radius: 16px;
+  text-decoration: none; border: 1px solid transparent; cursor: pointer;
+}
+.btn-pen { background: var(--pen); color: var(--onPen); box-shadow: 0 8px 24px var(--shadow); }
+.btn-pen:hover { transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line2); }
+.btn-ghost:hover { border-color: var(--pen); color: var(--pen); }
+.btn svg { width: 20px; height: 20px; }
+
+.coming {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--ui); font-size: 13px; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--muted);
+}
+.coming::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--pen); opacity: 0.7; }
+
+/* a character pops up over the App Store button on hover */
+.cta-btn { position: relative; display: inline-flex; }
+.cta-btn .btn { position: relative; z-index: 1; }
+.btn-peek {
+  position: absolute; left: 50%; top: 0; width: 64px; z-index: 0;
+  border: 0; pointer-events: none;
+  transform: translate(-50%, 16px) scale(.7) rotate(0deg);
+  opacity: 0;
+  transition: transform .55s cubic-bezier(.34,1.5,.5,1), opacity .3s ease;
+}
+.cta-btn:hover .btn-peek { transform: translate(-50%, -44px) scale(1) rotate(-8deg); opacity: 1; }
+@media (prefers-color-scheme: dark) {
+  .btn-peek { filter: invert(0.86) sepia(0.2) saturate(1.3) hue-rotate(180deg) brightness(1.05); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-peek { transition: opacity .2s ease; }
+}
+
+/* ---- sections ---- */
+section { padding: 84px 0; }
+.eyebrow {
+  font-family: var(--ui); font-size: 13px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--muted); margin: 0 0 14px;
+}
+
+/* ---- hero ---- */
+.hero { padding: 60px 0 40px; position: relative; }
+.hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center; }
+.hero h1 .soft { color: var(--ink2); }
+.hero .cta { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 30px; }
+
+/* the handwritten diary card in the hero */
+.diary-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  box-shadow: 0 30px 60px var(--shadow);
+  padding: 30px 30px 26px;
+  max-width: 420px;
+}
+.diary-card .head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
+.diary-card .head .wm { font-family: var(--serif); font-style: italic; font-size: 20px; }
+.diary-card .head .date { font-family: var(--ui); font-size: 13px; color: var(--muted); }
+.rule-line { border-bottom: 1px solid var(--rule); padding-bottom: 12px; margin-bottom: 12px; }
+.rule-line:last-of-type { border-bottom: 0; }
+.hand-line { font-family: var(--pen-font); color: var(--pen); font-size: 27px; line-height: 1.15; }
+.mood-chip {
+  display: inline-flex; align-items: center; gap: 7px; margin-top: 8px;
+  font-family: var(--ui); font-size: 14px; color: var(--ink2);
+  border: 1px solid var(--line2); border-radius: 999px; padding: 5px 13px;
+}
+.mood-chip .leaf { width: 8px; height: 8px; border-radius: 50%; background: #4A7A63; }
+
+/* ---- steps ---- */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.step {
+  background: var(--card); border: 1px solid var(--line); border-radius: 22px;
+  padding: 28px 26px; box-shadow: 0 10px 30px var(--shadow); position: relative;
+}
+.step .n {
+  font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--pen);
+  margin-bottom: 10px;
+}
+.step h3 { margin-bottom: 6px; }
+.step p { margin: 0; color: var(--ink2); font-size: 16px; }
+
+/* ---- feature rows ---- */
+.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px 34px; }
+.feature h3 { margin-bottom: 6px; }
+.feature p { color: var(--ink2); font-size: 16px; margin: 0; }
+.feature .k {
+  font-family: var(--pen-font); color: var(--pen); font-size: 20px; margin-bottom: 8px; display: block;
+}
+
+/* ---- privacy pledge ---- */
+.pledge {
+  background: var(--paperDeep); border: 1px solid var(--line);
+  border-radius: 26px; padding: 48px; text-align: center; position: relative;
+}
+.pledge h2 { margin-bottom: 12px; }
+.pledge p { color: var(--ink2); max-width: 620px; margin: 0 auto; }
+
+/* ---- price ---- */
+.price-wrap { text-align: center; }
+.price {
+  display: inline-flex; flex-direction: column; align-items: center; gap: 4px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 24px;
+  padding: 34px 56px; box-shadow: 0 14px 40px var(--shadow);
+}
+.price .num { font-family: var(--serif); font-size: 52px; font-weight: 600; }
+.price .note { font-family: var(--ui); font-size: 14px; color: var(--muted); }
+
+/* ---- screenshot gallery ---- */
+.shots {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start;
+  gap: 36px 20px; padding: 82px 2px 12px; overflow: visible;
+}
+.shots figure { position: relative; margin: 0; flex: 0 1 205px; min-width: 150px; }
+.shots img {
+  width: 100%; border-radius: 26px; border: 1px solid var(--line);
+  box-shadow: 0 20px 50px var(--shadow);
+  transition: transform .5s cubic-bezier(.2,.85,.25,1);
+}
+.shots figure:hover img:not(.peek) { transform: translateY(-7px); }
+/* a little ink character peeks over the top of the phone on hover */
+.shots figure img.peek {
+  position: absolute; left: 50%; top: 4px; width: 92px;
+  border: 0; border-radius: 0; box-shadow: none;
+  transform: translate(-50%, 16px) scale(.72) rotate(0deg);
+  opacity: 0; z-index: -1; pointer-events: none;
+  transition: transform .6s cubic-bezier(.34,1.5,.5,1), opacity .32s ease;
+}
+.shots figure:hover img.peek {
+  transform: translate(-50%, -70px) scale(1) rotate(-6deg);
+  opacity: .97;
+}
+.shots figcaption {
+  font-family: var(--pen-font); color: var(--pen); font-size: 18px;
+  text-align: center; margin-top: 12px;
+  transition: color .3s ease;
+}
+/* the peek only works with a real pointer; hide the hint on touch */
+.hover-hint { display: none; }
+@media (hover: hover) { .hover-hint { display: block; } }
+@media (prefers-color-scheme: dark) {
+  /* lift the ink toward the pen so peeks read on dark paper */
+  .shots figure img.peek { filter: invert(0.86) sepia(0.2) saturate(1.3) hue-rotate(180deg) brightness(1.05); }
+}
+
+/* ---- stickers ---- */
+.sticker { position: absolute; width: 72px; opacity: 0.9; pointer-events: none; z-index: 1; }
+@media (prefers-color-scheme: dark) {
+  /* the ink line-art reads as near-black; lift it toward the pen on dark paper */
+  .sticker { filter: invert(0.86) sepia(0.2) saturate(1.3) hue-rotate(180deg) brightness(1.05); opacity: 0.85; }
+  /* solid (white-filled) stickers carry their own paper, so leave them as-is */
+  .sticker-solid { filter: none; opacity: 0.96; }
+}
+
+/* ---- footer ---- */
+.site-footer { border-top: 1px solid var(--line); padding: 54px 0 70px; background: var(--paperDeep); }
+.foot-grid { display: flex; justify-content: space-between; gap: 30px; flex-wrap: wrap; align-items: flex-start; }
+.foot-links { display: flex; gap: 26px; flex-wrap: wrap; }
+.foot-links a { font-family: var(--ui); font-size: 15px; color: var(--ink2); text-decoration: none; }
+.foot-links a:hover { color: var(--pen); }
+.foot-note { font-family: var(--ui); font-size: 13px; color: var(--muted); margin-top: 22px; }
+
+/* ---- legal / content pages ---- */
+.doc { max-width: 760px; margin: 0 auto; padding: 60px 24px 90px; }
+.doc h1 { margin-bottom: 8px; }
+.doc .updated { font-family: var(--ui); font-size: 14px; color: var(--muted); margin-bottom: 40px; }
+.doc h2 { font-size: 25px; margin: 40px 0 12px; }
+.doc h3 { font-size: 19px; margin: 26px 0 8px; font-family: var(--serif); }
+.doc p, .doc li { color: var(--ink2); }
+.doc strong { color: var(--ink); font-weight: 600; }
+.doc ul { padding-left: 22px; }
+.doc li { margin-bottom: 8px; }
+.doc a { word-break: break-word; }
+.back {
+  display: inline-flex; align-items: center; gap: 8px; font-family: var(--ui);
+  font-size: 15px; color: var(--ink2); text-decoration: none; margin-bottom: 8px;
+}
+.back:hover { color: var(--pen); }
+.callout {
+  background: var(--paperDeep); border: 1px solid var(--line); border-radius: 18px;
+  padding: 20px 24px; margin: 24px 0;
+}
+.callout p:last-child { margin-bottom: 0; }
+
+/* ---- responsive ---- */
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 34px; }
+  .diary-card { margin: 0 auto; }
+  .steps { grid-template-columns: 1fr; }
+  .features { grid-template-columns: 1fr; gap: 26px; }
+  section { padding: 64px 0; }
+  .nav a.hide-sm { display: none; }
+  .pledge { padding: 36px 26px; }
+}
+@media (max-width: 480px) {
+  body { font-size: 17px; }
+  .price { padding: 28px 36px; }
+  .sticker { width: 56px; }
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn-pen:hover { transform: none; }
+  .shots img, .shots figure img.peek { transition: opacity .2s ease; }
+  .shots figure:hover img:not(.peek) { transform: none; }
+}
